@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test Progect Instruments</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <div class="main-container">
+      <div class="change-date">
+        <input type="date" name="date">
+        <input type="submit" name="submit" id="submit" value="OK">
+      </div> <!-- chsnge-date -->
+
+      <table width="80%" border="1px" align="center" id="timetable">
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Место работы / роль</th>
+            <th>00:00</th>
+            <th>01:00</th>
+            <th>02:00</th>
+            <th>03:00</th>
+            <th>04:00</th>
+            <th>05:00</th>
+            <th>06:00</th>
+            <th>07:00</th>
+            <th>08:00</th>
+            <th>09:00</th>
+            <th>10:00</th>
+            <th>11:00</th>
+            <th>12:00</th>
+            <th>13:00</th>
+            <th>14:00</th>
+            <th>15:00</th>
+            <th>16:00</th>
+            <th>17:00</th>
+            <th>18:00</th>
+            <th>19:00</th>
+            <th>20:00</th>
+            <th>21:00</th>
+            <th>22:00</th>
+            <th>23:00</th>
+          </tr>
+        </thead>
+        <tbody id="rows">
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="wow"></td>
+            <td></td>
+            <td id="td17"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="wow"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="wow"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <div id="tests">
+
+      </div>
+    </div><!-- main-container -->
+
+
+<script type="text/javascript">
+  var table = document.getElementById("timetable"); // Получаем ссылку на таблицу
+  var trs = t.getElementsByTagName("tr");
+
+
+  $("#timetable").append("<tr><td>TEST1</td><td>TEST2</td</tr>")
+</script>
+
+
+
+
+
+
+
+    <!-- JQuery connecting -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Main JS-file connecting -->
+    <script type="text/javascript" src="scripts.js"></script>
+  </body>
+</html>
