@@ -22,35 +22,33 @@ var myP = document.getElementById("td17");
 //получить HTML содержимое элемента, имеющего id="myP"
 myP.innerHTML;
 //изменить HTML содержимое элемента, имеющего id="myP"
-myP.innerHTML = "<em>Что-то новое</em>";
+myP.innerHTML = "<em>t</em>";
 
 
 
 
-
-function theRow(name, place, role) {
-  let timeTable = document.getElementById("timetable"); // Инициализируем таблицу
-  let newRow = document.createElement("tr"); // Создаем новую строку
-
-  let nameCell = document.createElement("td"); // Создаем первую ячейку
-
-  newRow.appendChild(newCell);
-  timeTable.appendChild(newRow);
-
-}
-
-TheRow(One);
-
-
-
-
-
-  function addRow() {
+  function theRow(string) {
     var timeTable = document.getElementById("timetable"); // Инициализируем таблицу
     var newRow = document.createElement("tr"); // Создаем новую строку
 
+    // Создаем первую ячейку со значением "Имя"
+    var readName = tests.virtual[string][0];
+    var nameCell=document.createElement("td");
+    nameCell.innerHTML = readName;
+    newRow.appendChild(nameCell);
 
-for (var i=0; i<26; i++) {
+    // Создаем первую ячейку со значением "Расположение и роль"
+    var readPlase = tests.virtual[string][1];
+    var readRole = tests.virtual[string][2];
+    var placeRoleCell=document.createElement("td");
+    placeRoleCell.innerHTML = readPlase + " / " + readRole;
+    newRow.appendChild(placeRoleCell);
+
+
+
+
+
+for (var i=0; i<24; i++) {
  var newCell=document.createElement("td");
  newCell.setAttribute('class', ipCreator + i);
  ipCreator ++;
@@ -61,8 +59,27 @@ for (var i=0; i<26; i++) {
 timeTable.appendChild(newRow);
    }
 
-   addRow();
-   addRow();
-   addRow();
-   addRow();
-   addRow();
+   theRow(0);
+   theRow(1);
+   theRow(2);
+   theRow(3);
+
+
+
+
+  /* function addRow(name) {
+     var timeTable = document.getElementById("timetable"); // Инициализируем таблицу
+     var newRow = document.createElement("tr"); // Создаем новую строку
+
+
+ for (var i=0; i<26; i++) {
+  var newCell=document.createElement("td");
+  newCell.setAttribute('class', ipCreator + i);
+  newCell.innerHTML = name;
+  ipCreator ++;
+
+
+  newRow.appendChild(newCell);
+ }
+ timeTable.appendChild(newRow);
+} */
