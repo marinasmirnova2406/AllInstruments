@@ -14,19 +14,6 @@ let tests =  {
     ]
   }
 
-
-var ipCreator = "0";
-
-//document.getElementById("tests").textContent = "Текст элемента р изменён";
-var myP = document.getElementById("td17");
-//получить HTML содержимое элемента, имеющего id="myP"
-myP.innerHTML;
-//изменить HTML содержимое элемента, имеющего id="myP"
-myP.innerHTML = "<em>t</em>";
-
-
-
-
   function theRow(string) {
     var timeTable = document.getElementById("timetable"); // Инициализируем таблицу
     var newRow = document.createElement("tr"); // Создаем новую строку
@@ -45,9 +32,6 @@ myP.innerHTML = "<em>t</em>";
     newRow.appendChild(placeRoleCell);
 
 
-
-
-
 for (var i=0; i<24; i++) {
  var newCell=document.createElement("td");
  newCell.setAttribute('class', ipCreator + i);
@@ -63,6 +47,42 @@ timeTable.appendChild(newRow);
    theRow(1);
    theRow(2);
    theRow(3);
+
+
+
+
+   var ipCreator = "0";
+   //document.getElementById("tests").textContent = "Текст элемента р изменён";
+   var myP = document.getElementById("td17");
+   //получить HTML содержимое элемента, имеющего id="myP"
+   myP.innerHTML;
+
+
+   function timeHandler(string) {
+     var date = new Date(tests.virtual[string][4]);
+     var dateYear = date.getFullYear();
+     return dateYear;
+   }
+
+
+
+   //изменить HTML содержимое элемента, имеющего id="myP"
+   myP.innerHTML = timeHandler(0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
