@@ -2,3 +2,11 @@
   width: 80%;
   margin: 15px auto;
 }
+
+.virtual {
+  background: Salmon;
+}
+
+.actual {
+  background: LimeGreen;
+}

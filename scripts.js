@@ -1,7 +1,7 @@
 
 let tests =  {
     virtual:[
-      ["Mary","Office","Manager","2019-11-04T08:30:00.000Z","2019-11-04T18:0000.000Z"],
+      ["Mary","Office","Manager","2019-11-04T08:30:00.000Z","2019-11-04T18:3000.000Z"],
       ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:0000.000Z"],
       ["Anne","Reception","Admin","2019-11-04T12:00:00.000Z","2019-11-04T20:0000.000Z"],
       ["nameN","placeN","role1","datetime_fromN","datetime_toN"]
@@ -59,21 +59,39 @@ timeTable.appendChild(newRow);
 
 
    function timeHandler(string) {
-     let readString = tests.virtual[string][3];
-     let time = {
-       year: readString[0] + readString[1] + readString[2] + readString[3],
-       month: readString[5] + readString[6],
-       day: readString[8] + readString[9],
-       hour: readString[11] + readString[12],
-       minute: readString[14] + readString[15]
+     let readStringV = tests.virtual[string][3];
+     let readStringA = tests.virtual[string][4];
+     let timeVirtual = {
+       year: readStringV[0] + readStringV[1] + readStringV[2] + readStringV[3],
+       month: readStringV[5] + readStringV[6],
+       day: readStringV[8] + readStringV[9],
+       hour: readStringV[11] + readStringV[12],
+       minute: readStringV[14] + readStringV[15]
      };
-     return time.minute;
+     let timeActual = {
+       year: readStringA[0] + readStringA[1] + readStringA[2] + readStringA[3],
+       month: readStringA[5] + readStringA[6],
+       day: readStringA[8] + readStringA[9],
+       hour: readStringA[11] + readStringA[12],
+       minute: readStringA[14] + readStringA[15]
+     };
+
+     if (timeVirtual.minute == "00") {
+       return "Yes";
+     } else {
+       return "NO!";
+     }
+
+
+
+
+
    }
 
 
 
    //изменить HTML содержимое элемента, имеющего id="myP"
-   myP.innerHTML = timeHandler(0);
+   myP.innerHTML = timeHandler(1);
 
 
 
