@@ -1,7 +1,7 @@
 
 let tests =  {
     virtual:[
-      ["Mary","Office","Manager","2019-11-04T08:00:00.000Z","2019-11-04T18:0000.000Z"],
+      ["Mary","Office","Manager","2019-11-04T08:30:00.000Z","2019-11-04T18:0000.000Z"],
       ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:0000.000Z"],
       ["Anne","Reception","Admin","2019-11-04T12:00:00.000Z","2019-11-04T20:0000.000Z"],
       ["nameN","placeN","role1","datetime_fromN","datetime_toN"]
@@ -59,9 +59,15 @@ timeTable.appendChild(newRow);
 
 
    function timeHandler(string) {
-     var date = new Date(tests.virtual[string][4]);
-     var dateYear = date.getFullYear();
-     return dateYear;
+     let readString = tests.virtual[string][3];
+     let time = {
+       year: readString[0] + readString[1] + readString[2] + readString[3],
+       month: readString[5] + readString[6],
+       day: readString[8] + readString[9],
+       hour: readString[11] + readString[12],
+       minute: readString[14] + readString[15]
+     };
+     return time.minute;
    }
 
 
