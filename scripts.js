@@ -31,17 +31,77 @@ let tests =  {
     placeRoleCell.innerHTML = readPlase + " / " + readRole;
     newRow.appendChild(placeRoleCell);
 
+    timeTable.appendChild(newRow);
 
-for (var i=0; i<24; i++) {
+
+/*for (var i=0; i<2; i++) {
  var newCell=document.createElement("td");
- newCell.setAttribute('class', ipCreator + i);
+ newCell.setAttribute('class', "virtual");
  ipCreator ++;
-
-
  newRow.appendChild(newCell);
-}
-timeTable.appendChild(newRow);
-   }
+}*/
+
+
+var ipCreator = "0";
+//document.getElementById("tests").textContent = "Текст элемента р изменён";
+var myP = document.getElementById("td17");
+//получить HTML содержимое элемента, имеющего id="myP"
+myP.innerHTML;
+
+
+function timeHandler(string) {
+  let readStringF = tests.virtual[string][3];
+  let readStringT = tests.virtual[string][4];
+  let timeFrom = {
+    year: readStringF[0] + readStringF[1] + readStringF[2] + readStringF[3],
+    month: readStringF[5] + readStringF[6],
+    day: readStringF[8] + readStringF[9],
+    hour: readStringF[11] + readStringF[12],
+    minute: readStringF[14] + readStringF[15]
+  };
+  let timeTo = {
+    year: readStringT[0] + readStringT[1] + readStringT[2] + readStringT[3],
+    month: readStringT[5] + readStringT[6],
+    day: readStringT[8] + readStringT[9],
+    hour: readStringT[11] + readStringT[12],
+    minute: readStringT[14] + readStringT[15]
+  };
+
+  if (timeFrom.minute == "00") {
+    let differenceHour = timeTo.hour - timeFrom.hour;
+
+    // Добавляем ячейки "До рабочео времени"
+    for (var i = 0; i < timeFrom.hour - 1; i++) {
+      var nameCell=document.createElement("td");
+      nameCell.innerHTML = "f";
+      newRow.appendChild(nameCell);
+    };
+
+
+    // Добавляем ячейки "Рабочее время"
+    for (var i = 0; i < differenceHour; i++) {
+      var readName = "abc";
+      var colorCell=document.createElement("td");
+      colorCell.innerHTML = readName;
+      colorCell.setAttribute('class', "virtual");
+
+      newRow.appendChild(colorCell);
+    };
+
+  } else {
+    return "NO!";
+  };
+
+
+
+}; // fun timeHandler
+
+
+
+timeHandler(1);
+
+
+}; // fun treRow
 
    theRow(0);
    theRow(1);
@@ -51,42 +111,7 @@ timeTable.appendChild(newRow);
 
 
 
-   var ipCreator = "0";
-   //document.getElementById("tests").textContent = "Текст элемента р изменён";
-   var myP = document.getElementById("td17");
-   //получить HTML содержимое элемента, имеющего id="myP"
-   myP.innerHTML;
 
-
-   function timeHandler(string) {
-     let readStringV = tests.virtual[string][3];
-     let readStringA = tests.virtual[string][4];
-     let timeVirtual = {
-       year: readStringV[0] + readStringV[1] + readStringV[2] + readStringV[3],
-       month: readStringV[5] + readStringV[6],
-       day: readStringV[8] + readStringV[9],
-       hour: readStringV[11] + readStringV[12],
-       minute: readStringV[14] + readStringV[15]
-     };
-     let timeActual = {
-       year: readStringA[0] + readStringA[1] + readStringA[2] + readStringA[3],
-       month: readStringA[5] + readStringA[6],
-       day: readStringA[8] + readStringA[9],
-       hour: readStringA[11] + readStringA[12],
-       minute: readStringA[14] + readStringA[15]
-     };
-
-     if (timeVirtual.minute == "00") {
-       return "Yes";
-     } else {
-       return "NO!";
-     }
-
-
-
-
-
-   }
 
 
 
