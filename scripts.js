@@ -71,12 +71,11 @@ function timeHandler(string) {
     let differenceHour = timeTo.hour - timeFrom.hour;
 
     // Добавляем ячейки "До рабочео времени"
-    for (var i = 0; i < timeFrom.hour - 1; i++) {
+    for (var i = 0; i < timeFrom.hour ; i++) {
       var nameCell=document.createElement("td");
       nameCell.innerHTML = "f";
       newRow.appendChild(nameCell);
     };
-
 
     // Добавляем ячейки "Рабочее время"
     for (var i = 0; i < differenceHour; i++) {
@@ -88,7 +87,23 @@ function timeHandler(string) {
       newRow.appendChild(colorCell);
     };
 
-  } else {
+    // если минуты конечного времени 00
+    if (timeTo.minute == "00") {
+      for (var i = 0; i < 24 - timeTo.hour; i++) {
+        var nameCell=document.createElement("td");
+        nameCell.innerHTML = "t";
+        newRow.appendChild(nameCell);
+      };
+
+
+      // если минуты конечного времени не 00
+    } else {
+      return "No.";
+    }
+
+
+
+  } else { // если начальное время не 00
     return "NO!";
   };
 
@@ -99,6 +114,8 @@ function timeHandler(string) {
 
 
 timeHandler(1);
+//изменить HTML содержимое элемента, имеющего id="myP"
+//myP.innerHTML = timeHandler(1);
 
 
 }; // fun treRow
@@ -115,8 +132,7 @@ timeHandler(1);
 
 
 
-   //изменить HTML содержимое элемента, имеющего id="myP"
-   myP.innerHTML = timeHandler(1);
+
 
 
 
