@@ -10,3 +10,11 @@
 .actual {
   background: LimeGreen;
 }
+
+table {
+  height:100%;
+}
+
+table tr td {
+  height:100%;
+}
