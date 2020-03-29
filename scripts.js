@@ -1,24 +1,54 @@
-
-let tests =  {
+// Объект-база данных
+var testing =  {
     virtual:[
-      ["Mary","Office","Manager","2019-11-04T07:00:00.000Z","2019-11-04T18:0000.000Z"],
-      ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:1500.000Z"],
-      ["Anne","Reception","Admin","2019-11-04T08:20:00.000Z","2019-11-04T20:3000.000Z"],
-      ["July","Office","HR","2019-11-04T08:20:00.000Z","2019-11-04T08:50000.000Z"],
-      ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:1500.000Z"],
+      ["Mary","Office","Manager","2020-03-30T07:00:00.000Z","2020-03-30T18:0000.000Z"],
+      ["Kate","Office","Manager","2020-03-30T07:00:00.000Z","2020-03-30T20:0000.000Z"],
+      ["Anne","Reception","Admin","2020-03-30T08:20:00.000Z","2020-03-30T20:3000.000Z"],
+      ["July","Reception","Admin","2020-03-30T08:20:00.000Z","2020-03-30T20:3000.000Z"],
+      ["Emily","Office","HR","2020-03-30T07:50:00.000Z","2020-03-30T18:1000.000Z"],
+      ["Sam","Office","HR","2020-03-30T09:00:00.000Z","2020-03-30T20:0000.000Z"],
+      ["Jake","Office","Accountant","2020-03-31T07:30:00.000Z","2020-03-31T20:0000.000Z"],
+      ["Max","Reception","Admin","2020-03-31T08:20:00.000Z","2020-03-30T21:3000.000Z"],
+      ["Monica","Office","Director","2020-03-31T08:40:00.000Z","2020-03-31T15:3000.000Z"],
+      ["Russel","Office","Manager","2020-03-31T09:50:00.000Z","2020-03-31T18:0000.000Z"],
       //["nameN","placeN","role1","datetime_fromN","datetime_toN"]
     ],
     actual:[
-      ["Mary","Office","Manager","2019-11-04T07:00:00.000Z","2019-11-04T18:0000.000Z"],
-      ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T22:0000.000Z"],
-      ["Anne","Reception","Admin","2019-11-04T13:00:00.000Z","2019-11-04T19:0000.000Z"],
-      ["July","Office","HR","2019-11-04T08:20:00.000Z","2019-11-04T20:3000.000Z"],
-      ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:1500.000Z"],
+      ["Mary","Office","Manager","2020-03-30T07:40:00.000Z","2020-03-30T19:0000.000Z"],
+      ["Kate","Office","Manager","2020-03-30T07:50:00.000Z","2020-03-30T20:1000.000Z"],
+      ["Anne","Reception","Admin","2020-03-30T07:50:00.000Z","2020-03-30T19:3000.000Z"],
+      ["July","Reception","Admin","2020-03-30T08:00:00.000Z","2020-03-30T20:0000.000Z"],
+      ["Emily","Office","HR","2020-03-30T07:50:00.000Z","2020-03-30T18:1000.000Z"],
+      ["Sam","Office","HR","2020-03-30T09:50:00.000Z","2020-03-30T20:0000.000Z"],
+      ["Jake","Office","Accountant","2020-03-31T07:20:00.000Z","2020-03-31T20:1000.000Z"],
+      ["Max","Reception","Admin","2020-03-31T08:20:00.000Z","2020-03-30T21:2000.000Z"],
+      ["Monica","Office","Director","2020-03-31T08:00:00.000Z","2020-03-31T17:3000.000Z"],
+      ["Russel","Office","Manager","2020-03-31T09:45:00.000Z","2020-03-31T19:0000.000Z"],
       //["nameN","placeN","role1","datetime_fromN","datetime_toN"]
     ]
-  }
+  };
 
+
+  var inp = document.getElementById('inputDate');
+  var sub = document.getElementById('submit');
+  var cont = document.getElementById('cont');
+
+  cont.innerHTML = inputDate.value;
+  var tests = new Object();
+  tests.virtual = [];
+  tests.actual = [];
+  var baseArray = [];
+
+
+
+  // ---------------------------------------
+  // ---------------------------------------
+  // Функция, создающая новую строку таблицы
+  // ---------------------------------------
+  // ---------------------------------------
   function theRow(variant, string) {
+
+    // Присвоение переменым arrVariant и colorClass значений, отвечающих необходимому статусу времени (актуальный или плановый)
     if (variant == "virtual") {
       var arrVariant = tests.virtual;
       var colorClass = "virtual";
@@ -29,35 +59,40 @@ let tests =  {
 
 
     var timetable = document.getElementById("timetable"); // Инициализируем таблицу
-    var allrows = document.getElementById("allrows"); // Инициализируем наполнение таблицы
     var newRow = document.createElement("tr"); // Создаем новую строку
     newRow.setAttribute('class', 'renewable');
 
+    // Добавляем строку
+    timetable.appendChild(newRow);
+
     // Создаем первую ячейку со значением "Имя"
-    var readName = arrVariant[string][0];
-    var nameCell=document.createElement("td");
+    let readName = arrVariant[string][0];
+    let nameCell=document.createElement("td");
     nameCell.innerHTML = readName;
     newRow.appendChild(nameCell);
 
+    // Назначаем событие: по клику на ячейку происходит выхов функции имены статуса (актуальное или плановое)
     nameCell.addEventListener ("click", function() {
       changeFun(string, variant);
-     })
+    });
 
     // Создаем первую ячейку со значением "Расположение и роль"
-    var readPlase = arrVariant[string][1];
-    var readRole = arrVariant[string][2];
-    var placeRoleCell=document.createElement("td");
+    let readPlase = arrVariant[string][1];
+    let readRole = arrVariant[string][2];
+    let placeRoleCell=document.createElement("td");
     placeRoleCell.innerHTML = readPlase + " / " + readRole;
     newRow.appendChild(placeRoleCell);
 
-    timetable.appendChild(newRow);
+    // Назначаем событие: по клику на ячейку происходит выхов функции имены статуса (актуальное или плановое)
+    placeRoleCell.addEventListener ("click", function() {
+      changeFun(string, variant);
+    });
 
-
-    // -----------------------------
-    // -----------------------------
-    // считывание времени ----------
-    // -----------------------------
-    // -----------------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // Считывание времени объекта-базы данных и назначение ячейкам визуального их отображения
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
     function timeHandler(variant, string) {
       let readStringF = variant[string][3];
       let readStringT = variant[string][4];
@@ -76,30 +111,30 @@ let tests =  {
         minute: readStringT[14] + readStringT[15]
       };
 
-      let differenceHour = timeTo.hour - timeFrom.hour;
+      let differenceHour = timeTo.hour - timeFrom.hour; // Разница значений "Час"
 
 
       // -----------------------------
       // -----------------------------
-      // функции создания ячеек ------
+      // Функции создания ячеек ------
       // -----------------------------
       // -----------------------------
 
-      // Создание пустой ячейки
+      // Функция, создающая пустую ячейку
       function empty() {
         var emptyCell=document.createElement("td");
         newRow.appendChild(emptyCell);
       };
 
-      // Создание ячейки "Рабочее время"
+      // Функция, создающая ячейку "Рабочее время" (полностью закрашенную)
       function work() {
         var colorCell=document.createElement("td");
         colorCell.setAttribute('class', colorClass);
         newRow.appendChild(colorCell);
       };
 
-      // Определение того, нужно ли создавать не полный рабочий час ВНАЧАЛЕ рабочего создания
-      // И его создание
+      // Определение того, нужно ли создавать не полный рабочий час ВНАЧАЛЕ рабочего дня
+      // И функция, котораЯ его создает
       function partHourBefore() {
         var partCell=document.createElement("td");
         let reverceMinute = 60 - timeFrom.minute;
@@ -110,7 +145,7 @@ let tests =  {
       }
 
       // Определение того, нужно ли создавать не полный рабочий час ВКОНЦЕ рабочего создания
-      // И его создание
+      // И функция, котораЯ его создает
       function partHourAfter() {
         // если минуты конечного времени 00
         if (timeTo.minute == "00") {
@@ -118,27 +153,35 @@ let tests =  {
             empty();
           };
 
-          // если минуты конечного времени не 00
+          // Решение на случай, если последний час рабочего времени является не полным
         } else {
 
-          // добавление ячейки с неполным часом "после"
+          // Добавление ячейки с неполным часом
           var partCell=document.createElement("td");
           let percent = Math.round(timeTo.minute * 100 / 60);
           partCell.innerHTML = '<div class="' + colorClass + '" style="height: 100%; width: ' + percent + '%;"></div>';
           newRow.appendChild(partCell);
 
-          // добавление пустых яеек после рабочего времени
+          // Добавление пустых яеек после рабочего времени
           for (var i = 0; i < 23 - timeTo.hour; i++) {
             empty();
           };
         };
       };
 
+      // Решение на случай, если весь рабочий день менее одного часа
       if (differenceHour == 0) {
 
-        // Добавляем ячейки "До рабочео времени"
+        // Добавление ячейки "До рабочео времени"
         for (var i = 0; i < timeFrom.hour ; i++) {
           empty();
+
+          // Назначаем событие: по клику на ячейку происходит выхов функции имены статуса (актуальное или плановое)
+          nameCell.addEventListener ("click", function() {
+            changeFun(string, variant);
+          });
+
+
         };
 
         var partCell=document.createElement("td");
@@ -148,26 +191,27 @@ let tests =  {
         partCell.innerHTML = '<div style="display: inline-block; height: 100%; width: ' + prePercent + '%;"></div><div class="' + colorClass + '"style="margin-bottom: -1px; display: inline-block; height: 100%; width: ' + percent + '%;"></div>';
         newRow.appendChild(partCell);
 
-        // Добавляем ячейки "После рабочео времени"
+        // Добавление ячейки "После рабочео времени"
         for (var i = 0; i < 23 - timeTo.hour; i++) {
           empty();
         };
 
       // Если рабочее время больше часа
       } else {
-        // -----------------------------
-        // -----------------------------
-        // если начальное время 00 минут
-        // -----------------------------
-        // -----------------------------
+
+        // ------------------------------------------
+        // ------------------------------------------
+        // Если начальное время начинается с 00 минут
+        // ------------------------------------------
+        // ------------------------------------------
         if (timeFrom.minute == "00") {
 
-          // Добавляем ячейки "До рабочео времени"
+          // Добавление ячеек "До рабочео времени"
           for (var i = 0; i < timeFrom.hour ; i++) {
             empty();
           };
 
-          // Добавляем ячейки "Рабочее время"
+          // Добавление ячейки "Рабочее время"
           for (var i = 0; i < differenceHour; i++) {
             work();
           };
@@ -175,19 +219,19 @@ let tests =  {
           // Вызов функции пределения неполного часа + создание ячеек "после"
           partHourAfter();
 
-        // --------------------------
-        // --------------------------
-        // если начальное время не 00
-        // --------------------------
-        // --------------------------
+        // ---------------------------------------------
+        // ---------------------------------------------
+        // Если начальное время начинается не с 00 минут
+        // ---------------------------------------------
+        // ---------------------------------------------
         } else {
 
-          // Добавляем ячейки "До рабочео времени", не отнимаем 1, т.к. отсчет начинается с 00, а не с 01.
+          // Добавление ячейки пустых ячеек до "рабочего времени"
           for (var i = 0; i < timeFrom.hour ; i++) {
             empty();
           };
 
-          // добавление ячейки с неполным часом
+          // Добавление ячейки с неполным часом
           partHourBefore();
 
           // Добавляем ячейки "Рабочее время"
@@ -195,28 +239,12 @@ let tests =  {
             work();
           };
 
-          // Вызов функции пределения неполного часа + создание ячеек "после"
+          // Вызов функции определения неполного часа + создание ячеек "после"
           partHourAfter();
 
-        };
-      };
+        }; // Конец eslse внутреннего
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      }; // Конец eslse внешнего
 
     }; // fun timeHandler
 
@@ -224,39 +252,25 @@ let tests =  {
 
 }; // fun treRow
 
-
-
-
-
-// При загрузке страницы выводтся все плановые значения работы,
-// а так же записываются в массив baseArray их статусы
-var baseArray = [];
-$(document).ready ( function() {
-  for (var i = 0; i < tests.virtual.length; i++) {
-    theRow("virtual", i);
-    baseArray[i] = "virtual";
-  }
-});
-
-
-
-
 // Функция вызывается при клике на ячейку
 function changeFun(sequence, variant) {
 
   //Удаление предыдущих строк
   $('.renewable').html('');
 
-
+  // Если вариант выбранной строки - плановое время
   if (variant == "virtual") {
 
+    // Воссоздание строк до выбранной, соответствующе их текущему статусу
     for (var i = 0; i < sequence; i++) {
       theRow(baseArray[i], i);
     };
 
+    // Переопределение статуса выбраной строки и её создание
     theRow("actual", sequence);
     baseArray[sequence] = "actual";
 
+    // Воссоздание строк после выбранной, соответствующе их текущему статусу
     for (var i = sequence + 1; i < tests.virtual.length; i++) {
       theRow(baseArray[i], i);
     }
@@ -279,28 +293,30 @@ function changeFun(sequence, variant) {
 }
 
 
+// По клику по кнопке "ОК" вызов следующей функции:
+sub.addEventListener ("click", function() {
+  // Обнуление массива с предыдущими датами
+  tests.virtual = [];
+  tests.actual = [];
 
+  // Отбираем все смены с совпадающей датов в отдельный массив
+  for (var i = 0; i < testing.virtual.length; i++) {
+    var testDate = testing.virtual[i][3][0] + testing.virtual[i][3][1] + testing.virtual[i][3][2] + testing.virtual[i][3][3] + "-" + testing.virtual[i][3][5] + testing.virtual[i][3][6] + "-" + testing.virtual[i][3][8] + testing.virtual[i][3][9];
+    if (testDate == inputDate.value) {
+      tests.virtual.push(testing.virtual[i]);
+    }
+  }
 
+  for (var i = 0; i < testing.actual.length; i++) {
+    var testDate = testing.actual[i][3][0] + testing.actual[i][3][1] + testing.actual[i][3][2] + testing.actual[i][3][3] + "-" + testing.actual[i][3][5] + testing.actual[i][3][6] + "-" + testing.actual[i][3][8] + testing.actual[i][3][9];
+    if (testDate == inputDate.value) {
+      tests.actual.push(testing.actual[i]);
+    }
+  }
 
+    for (var i = 0; i < tests.virtual.length; i++) {
+      theRow("virtual", i);
+      baseArray[i] = "virtual";
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
+});

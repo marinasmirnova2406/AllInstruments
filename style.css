@@ -8,11 +8,11 @@ body {
 }
 
 .virtual {
-  background: Salmon;
+  background: #999999;
 }
 
 .actual {
-  background: LimeGreen;
+  background: repeating-linear-gradient(-60deg, #555 0, #555 1px, transparent 1px, transparent 5px);
 }
 
 table {
