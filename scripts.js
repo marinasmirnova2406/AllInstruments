@@ -5,6 +5,7 @@ let tests =  {
       ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:1500.000Z"],
       ["Anne","Reception","Admin","2019-11-04T08:20:00.000Z","2019-11-04T20:3000.000Z"],
       ["July","Office","HR","2019-11-04T08:20:00.000Z","2019-11-04T08:50000.000Z"],
+      ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:1500.000Z"],
       //["nameN","placeN","role1","datetime_fromN","datetime_toN"]
     ],
     actual:[
@@ -12,6 +13,7 @@ let tests =  {
       ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T22:0000.000Z"],
       ["Anne","Reception","Admin","2019-11-04T13:00:00.000Z","2019-11-04T19:0000.000Z"],
       ["July","Office","HR","2019-11-04T08:20:00.000Z","2019-11-04T20:3000.000Z"],
+      ["Kate","Office","Manager","2019-11-04T09:00:00.000Z","2019-11-04T20:1500.000Z"],
       //["nameN","placeN","role1","datetime_fromN","datetime_toN"]
     ]
   }
@@ -26,23 +28,29 @@ let tests =  {
     };
 
 
-    let timeTable = document.getElementById("timetable"); // Инициализируем таблицу
-    let newRow = document.createElement("tr"); // Создаем новую строку
+    var timetable = document.getElementById("timetable"); // Инициализируем таблицу
+    var allrows = document.getElementById("allrows"); // Инициализируем наполнение таблицы
+    var newRow = document.createElement("tr"); // Создаем новую строку
+    newRow.setAttribute('class', 'renewable');
 
     // Создаем первую ячейку со значением "Имя"
-    let readName = arrVariant[string][0];
-    let nameCell=document.createElement("td");
+    var readName = arrVariant[string][0];
+    var nameCell=document.createElement("td");
     nameCell.innerHTML = readName;
     newRow.appendChild(nameCell);
 
+    nameCell.addEventListener ("click", function() {
+      changeFun(string, variant);
+     })
+
     // Создаем первую ячейку со значением "Расположение и роль"
-    let readPlase = arrVariant[string][1];
-    let readRole = arrVariant[string][2];
-    let placeRoleCell=document.createElement("td");
+    var readPlase = arrVariant[string][1];
+    var readRole = arrVariant[string][2];
+    var placeRoleCell=document.createElement("td");
     placeRoleCell.innerHTML = readPlase + " / " + readRole;
     newRow.appendChild(placeRoleCell);
 
-    timeTable.appendChild(newRow);
+    timetable.appendChild(newRow);
 
 
     // -----------------------------
@@ -79,16 +87,13 @@ let tests =  {
 
       // Создание пустой ячейки
       function empty() {
-        let emptyCell=document.createElement("td");
-        emptyCell.innerHTML = "e";
+        var emptyCell=document.createElement("td");
         newRow.appendChild(emptyCell);
       };
 
       // Создание ячейки "Рабочее время"
       function work() {
-        let readName = "abc";
-        let colorCell=document.createElement("td");
-        colorCell.innerHTML = readName;
+        var colorCell=document.createElement("td");
         colorCell.setAttribute('class', colorClass);
         newRow.appendChild(colorCell);
       };
@@ -96,11 +101,11 @@ let tests =  {
       // Определение того, нужно ли создавать не полный рабочий час ВНАЧАЛЕ рабочего создания
       // И его создание
       function partHourBefore() {
-        let partCell=document.createElement("td");
+        var partCell=document.createElement("td");
         let reverceMinute = 60 - timeFrom.minute;
         let percent = Math.round(reverceMinute * 100 / 60);
         partCell.setAttribute('style', 'text-align: right;');
-        partCell.innerHTML = '<div class="' + colorClass + '"style="display: inline-block; height: 100%; width: ' + percent + '%;"></div>';
+        partCell.innerHTML = '<div class="' + colorClass + '"style="margin-bottom: -3px; display: inline-block; height: 100%; width: ' + percent + '%;"></div>';
         newRow.appendChild(partCell);
       }
 
@@ -117,7 +122,7 @@ let tests =  {
         } else {
 
           // добавление ячейки с неполным часом "после"
-          let partCell=document.createElement("td");
+          var partCell=document.createElement("td");
           let percent = Math.round(timeTo.minute * 100 / 60);
           partCell.innerHTML = '<div class="' + colorClass + '" style="height: 100%; width: ' + percent + '%;"></div>';
           newRow.appendChild(partCell);
@@ -136,11 +141,11 @@ let tests =  {
           empty();
         };
 
-        let partCell=document.createElement("td");
+        var partCell=document.createElement("td");
         let minuteLessHour = timeTo.minute - timeFrom.minute;
         let percent = Math.round(minuteLessHour * 100 / 60);
         let prePercent = Math.round(timeFrom.minute * 100 / 60);
-        partCell.innerHTML = '<div style="display: inline-block; height: 100%; width: ' + prePercent + '%;"></div><div class="' + colorClass + '"style="display: inline-block; height: 100%; width: ' + percent + '%;"></div>';
+        partCell.innerHTML = '<div style="display: inline-block; height: 100%; width: ' + prePercent + '%;"></div><div class="' + colorClass + '"style="margin-bottom: -1px; display: inline-block; height: 100%; width: ' + percent + '%;"></div>';
         newRow.appendChild(partCell);
 
         // Добавляем ячейки "После рабочео времени"
@@ -194,8 +199,24 @@ let tests =  {
           partHourAfter();
 
         };
+      };
 
-      }; // else (рабочее время больше часа)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }; // fun timeHandler
 
@@ -205,6 +226,81 @@ let tests =  {
 
 
 
-for (var i = 0; i < tests.virtual.length; i++) {
-  theRow("virtual", i);
+
+
+// При загрузке страницы выводтся все плановые значения работы,
+// а так же записываются в массив baseArray их статусы
+var baseArray = [];
+$(document).ready ( function() {
+  for (var i = 0; i < tests.virtual.length; i++) {
+    theRow("virtual", i);
+    baseArray[i] = "virtual";
+  }
+});
+
+
+
+
+// Функция вызывается при клике на ячейку
+function changeFun(sequence, variant) {
+
+  //Удаление предыдущих строк
+  $('.renewable').html('');
+
+
+  if (variant == "virtual") {
+
+    for (var i = 0; i < sequence; i++) {
+      theRow(baseArray[i], i);
+    };
+
+    theRow("actual", sequence);
+    baseArray[sequence] = "actual";
+
+    for (var i = sequence + 1; i < tests.virtual.length; i++) {
+      theRow(baseArray[i], i);
+    }
+
+} if (variant == "actual") {
+
+  for (var i = 0; i < sequence; i++) {
+    theRow(baseArray[i], i);
+  };
+
+    theRow("virtual", sequence);
+    baseArray[sequence] = "virtual";
+
+    for (var i = sequence + 1; i < tests.virtual.length; i++) {
+      theRow(baseArray[i], i);
+    }
+
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
