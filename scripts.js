@@ -61,14 +61,19 @@ let tests =  {
         minute: readStringT[14] + readStringT[15]
       };
 
+      // Создание пустой ячейки
+      function empty() {
+        var emptyCell=document.createElement("td");
+        emptyCell.innerHTML = "e";
+        newRow.appendChild(emptyCell);
+      };
+
       if (timeFrom.minute == "00") {
         let differenceHour = timeTo.hour - timeFrom.hour;
 
         // Добавляем ячейки "До рабочео времени", не отнимает 1, т.к. отсчет начинается с 00, а не с 01.
         for (var i = 0; i < timeFrom.hour ; i++) {
-          var emptyCell=document.createElement("td");
-          emptyCell.innerHTML = "f";
-          newRow.appendChild(emptyCell);
+          empty();
         };
 
         // Добавляем ячейки "Рабочее время"
@@ -83,9 +88,7 @@ let tests =  {
         // если минуты конечного времени 00
         if (timeTo.minute == "00") {
           for (var i = 0; i < 24 - timeTo.hour; i++) {
-            var emptyCell=document.createElement("td");
-            emptyCell.innerHTML = "t";
-            newRow.appendChild(emptyCell);
+            empty();
           };
 
 
@@ -97,24 +100,20 @@ let tests =  {
           newRow.appendChild(partCell);
 
           for (var i = 0; i < 23 - timeTo.hour; i++) {
-            var emptyCell=document.createElement("td");
-            emptyCell.innerHTML = "t";
-            newRow.appendChild(emptyCell);
+            empty();
           };
-
-
-
-
-
-
-
-
-          return "No.";
-        }
-
+        };
 
 
       } else { // если начальное время не 00
+
+
+
+
+
+
+
+
         return "NO!";
       };
 
